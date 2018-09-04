@@ -12,6 +12,7 @@ def chromatic():
             file.write('#' + str(i) + '\n\n' + make_tab(f,o))
             sys.stdout.flush()
             i += 1
+    print('i at the end was', i)
 
     file.close()
 
