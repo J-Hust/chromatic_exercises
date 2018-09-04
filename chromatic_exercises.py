@@ -1,19 +1,19 @@
-# fingers = [0,0,0,0]
-# offsets = [0,0,0,0]
-
-    # for each set of fingers:
-        # for each set of offsets:
-            #make the tab
-        
 import itertools
+import sys
 
-def combos():
-    f = [1,2,3,4]
-    o = [0,1,2,3,4,5]
+def chromatic():
+    fingers = [1,2,3,4]
+    offsets = [0,1,2,3,4,5]
+    i = 1
 
-    for x in itertools.permutations(f, 4):
-        for y in itertools.product(o, repeat=4):
-            print('x', x, 'y', y)
+    file = open('chromatic_exercises.txt', 'a')
+    for f in itertools.permutations(fingers, 4):
+        for o in itertools.product(offsets, repeat=4):
+            file.write('#' + str(i) + '\n\n' + make_tab(f,o))
+            sys.stdout.flush()
+            i += 1
+
+    file.close()
 
 def make_tab(fingers, offsets):
 
@@ -49,14 +49,13 @@ def make_tab(fingers, offsets):
                 finished = True
         active_string -= 1
 
-    print(format_tab(tab))
+    return format_tab(tab)
 
 def format_tab(tab):
     final = ''
     for string in list(reversed(tab)):
         final += ' '.join(map(str, string)) + '\n'
-    return final + '\n\n\n'
+    return final + '\n\n'
 
 
-# make_tab([4,2,3,1], [0,0,0,0])
-combos()
+chromatic()
